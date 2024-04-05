@@ -24,7 +24,7 @@
 
 Summary: Apache HTTP Server
 Name: httpd24u
-Version: 2.4.58
+Version: 2.4.59
 Release: 1%{?dist}
 URL: https://httpd.apache.org/
 Source0: https://www.apache.org/dist/httpd/httpd-%{version}.tar.bz2
@@ -80,8 +80,6 @@ Patch26: httpd-2.4.43-gettid.patch
 Patch27: httpd-2.4.54-icons.patch
 Patch30: httpd-2.4.43-cachehardmax.patch
 Patch34: httpd-2.4.43-socket-activation.patch
-Patch41: httpd-2.4.43-r1861793+.patch
-	
 Patch65: httpd-2.4.51-r1894152.patch
 
 # Security fixes
@@ -294,7 +292,6 @@ interface for storing and accessing per-user session data.
 %patch27 -p1 -b .icons
 %patch30 -p1 -b .cachehardmax
 %{?with_systemd:%patch34 -p1 -b .socketactivation}
-%patch41 -p1 -b .r1861793+
 %patch65 -p1 -b .r1894152
 
 # Patch in the vendor string
@@ -827,6 +824,11 @@ exit $rv
 
 
 %changelog
+* Thu Apr 04 2024 Reporter4u <reporter4u@gmail.com> - 2.4.59-1
+- Update to upstream 2.4.59 (Bugfix and improvements)
+- Fixes CVE-2024-27316, CVE-2024-24795, CVE-2023-38709
+- Removed Patch41 incorporated in upstream
+
 * Thu Oct 19 2023 Reporter4u <reporter4u@gmail.com> - 2.4.58-1
 - Update to upstream 2.4.58 (Bugfix and improvements)
 - Fixes CVE-2023-45802, CVE-2023-43622, CVE-2023-31122

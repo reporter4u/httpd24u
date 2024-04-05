@@ -1,8 +1,7 @@
 diff --git a/configure.in b/configure.in
-index 74015ca..8c0ee10 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -508,6 +508,11 @@ getloadavg
+@@ -531,6 +531,11 @@
  dnl confirm that a void pointer is large enough to store a long integer
  APACHE_CHECK_VOID_PTR_LEN
  
@@ -11,9 +10,9 @@ index 74015ca..8c0ee10 100644
 +   APR_ADDTO(HTTPD_LIBS, [-lselinux])
 +])
 +
- AC_CACHE_CHECK([for gettid()], ac_cv_gettid,
- [AC_TRY_RUN(#define _GNU_SOURCE
- #include <unistd.h>
+ if test $ac_cv_func_gettid = no; then
+   # On Linux before glibc 2.30, gettid() is only usable via syscall()
+   AC_CACHE_CHECK([for gettid() via syscall], ap_cv_gettid,
 diff --git a/server/core.c b/server/core.c
 index a6fa2fb..cf4cba4 100644
 --- a/server/core.c
